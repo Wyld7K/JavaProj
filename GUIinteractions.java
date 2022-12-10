@@ -3,8 +3,8 @@ import javax.swing.*;
 /**
  * 
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Hudson Wesel
+ * @version v1.0.0
  */
 
 public class GUIinteractions {
@@ -75,7 +75,55 @@ public class GUIinteractions {
                 entry[1].setText("Format");
                 entry[2].setText("");
                 entry[3].setText("");
+                break;
 
+            }
+            case 5: {
+                report.setText(
+                        "Please Input two numbers in the first two boxes and I will determine if they are almost prime :D \n"
+                                +
+                                "An almost prime is a composite number that has exactly two factors other than itself and they are both prime  ");
+                entry[0].setText("First-Number");
+                entry[1].setText("Second-Number");
+                entry[2].setText("");
+                entry[3].setText("");
+                break;
+
+            }
+
+            case 6: {
+                report.setText("Please input in the first box, your speed that you were driving. \n" +
+                        "In the second box, input \'yes\' if it is your birthday!");
+
+                entry[0].setText("Your Speed");
+                entry[1].setText("Is It Your Birthday?");
+                entry[2].setText("");
+                entry[3].setText("");
+                break;
+
+            }
+            case 7: {
+                report.setText(
+                        "Please enter any string containing any number of digits and I will take the sum of them!");
+                entry[0].setText("Your Phrase With Digits!");
+                entry[1].setText("");
+                entry[2].setText("");
+                entry[3].setText("");
+                break;
+
+            }
+            case 8: {
+                report.setText("Please enter yes or no in the following boxes \n" +
+                        "Box 1: Is It Morning? \n" +
+                        "Box 2: Is Your Mom Calling? \n" +
+                        "Box 3: Are you Asleep? \n" +
+                        "Box 4: Are You Grumpy?");
+
+                entry[0].setText("isMorning?");
+                entry[1].setText("isMomCalling?");
+                entry[2].setText("isAsleep?");
+                entry[3].setText("isGrumpy?");
+                break;
             }
 
             // must leave this in:
@@ -132,8 +180,6 @@ public class GUIinteractions {
              * CASE 2: Mr. Beckwith's silly TESTING METHOD IS SELECTED
              */
             case 2: {
-
-                System.out.println("ALIGINIregreNG");
                 // OKAY_LINE_UP
                 resultBool = tasks.okayLineUp(Integer.parseInt(arg1), Integer.parseInt(arg2), Integer.parseInt(arg3));
                 if (resultBool)
@@ -147,21 +193,52 @@ public class GUIinteractions {
              * CASE 3: THIS IS WHERE YOU START TO ADD YOURS
              */
             case 3: {
-                String result = tasks.multString(arg1, Integer.parseInt(arg2));
-                report.setText(result);
+                report.setText(tasks.multString(arg1, Integer.parseInt(arg2)));
             }
 
             case 4: {
-                String result = tasks.phoneNumberFormatter(arg1, Integer.parseInt(arg2));
-                report.setText(result);
 
+                report.setText(tasks.phoneNumberFormatter(arg1, Integer.parseInt(arg2)));
                 break;
 
             }
 
             case 5: {
+                report.setText(tasks.almostPrime(Integer.parseInt(arg1), Integer.parseInt(arg2)));
+                break;
 
             }
+            case 6: {
+                boolean isBirthday = false;
+                if (arg2.toLowerCase().equals("yes") || arg2.charAt(0) == 'y')
+                    isBirthday = true;
+                report.setText(("Your Ticket Fine Is: " + tasks.getTicket(Integer.parseInt(arg1), isBirthday)));
+                break;
+
+            }
+            case 7: {
+                report.setText("Your Sum Of Digits Is: " + tasks.stringNumberSum(arg1));
+                break;
+            }
+            case 8: {
+
+                boolean boolarg1 = Utility.YayOrNay(arg1);
+                boolean boolarg2 = Utility.YayOrNay(arg2);
+                boolean boolarg3 = Utility.YayOrNay(arg3);
+                boolean boolarg4 = Utility.YayOrNay(arg4);
+                System.out.println("erwaoiuhfewauehfiwauefhw");
+                report.setText("IJEOWIJFEOI");
+                if (tasks.shouldAnswerCell(boolarg1, boolarg2, boolarg3, boolarg4)) {
+                    report.setText("You answered the call!");
+                } else {
+
+                    report.setText("You did NOT answer the call!");
+                }
+
+                break;
+                // report.setText)
+            }
+
             // must leave this in:
             default:
                 break;

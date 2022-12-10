@@ -41,6 +41,12 @@ public class Utility {
         return false;
     }
 
+    public static boolean YayOrNay(String input) {
+        if (input.equals("Y") || input.equals("Yes") || input.equals("YES") || input.equals("yes"))
+            return true;
+        return false;
+    }
+
     public static void clearTerminal() {
         // String sequence to clear terminal: \033[H\033[2J
         System.out.print("\033[H\033[2J");

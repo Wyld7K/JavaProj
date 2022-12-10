@@ -89,6 +89,23 @@ public class testMethods {
         return false;
     }
 
+    public static boolean shouldAnswerCell(boolean isMorning, boolean isMom, boolean isAsleep, boolean isGrumpy) {
+
+        if (!(isAsleep)) {
+            if (isMorning && isMom) {
+                return true;
+            } else if (!(isMorning || isGrumpy))
+                return true;
+        } else {
+
+            return false;
+        }
+        return false;
+    }
+
+    // 13 & 14. Make up two of your own methods which take arguments, do something
+    // interesting with them, and then return some value
+
     public static boolean okayLineUp(double height1, double height2, double height3) {
         ArrayList<Double> heights = new ArrayList<>();
 
@@ -155,24 +172,34 @@ public class testMethods {
         return temp[0] + temp[1];
     }
 
-    public static ArrayList<String> findFactors(int num) {
-        ArrayList<String> factors = new ArrayList<>();
-        for (int i = 1; i < 10; i++) {
-            if (num % i == 0) {
-                // if()
-                factors.add(((num / i) + " " + i));
+    public static boolean isPrime(int num) {
+        if (num != 2) {
+            if (num % 2 == 0)
+                return false;
+            else {
+                long end = (long) (Math.sqrt(num) + 1);
+                for (long divisor = 3; divisor <= end; divisor += 2) {
+                    if (num % divisor == 0) {
+                        return false;
+                    }
+                }
             }
         }
-        ArrayList<String> factorsCopy = (ArrayList<String>) factors.clone();
+        return true;
+    }
 
-        factors.forEach((ogstrEl) -> {
-            factorsCopy.forEach((strEl) -> {
-                System.out.println(ogstrEl);
-                System.out.println((reverseString(ogstrEl)));
-                if ((reverseString(ogstrEl)).equals(strEl))
-                    factors.remove(ogstrEl);
-            });
-        });
+    public static ArrayList<String> findFactors(int num) {
+        ArrayList<String> factors = new ArrayList<>();
+
+        for (int i = num; i > 0; i--) {
+            for (int j = 1; j < num; j++) {
+                boolean isNotOne = (j != 1) && (i != 1);
+                boolean isPrimes = isPrime(i) && isPrime(j);
+                boolean isFactors = (j * i == num);
+                if (isNotOne && isPrimes && isFactors)
+                    factors.add(((num / i) + " " + i));
+            }
+        }
 
         return (ArrayList<String>) factors;
 
@@ -181,45 +208,47 @@ public class testMethods {
     public static String almostPrime(int min, int max) {
         ArrayList<ArrayList<String>> factors = new ArrayList<ArrayList<String>>();
         for (int i = min; i < max; i++) {
-            factors.add(findFactors(i));
+            if ((findFactors(i).size() != 0)) {
+                factors.add(findFactors(i));
+            }
         }
         System.out.println(factors);
-
         if (factors.size() > 0)
             return "YES! ALMOST PRIME!";
         return "NO! Not Prime...";
     }
 
-    public static boolean isPrimeString(String str, int start, int mid, int end) {
-        String repeatingString = (str.substring(start, mid) + str.substring(mid, end));
-        if (repeatingString.indexOf(str, mid) != -1)
-            return false;
-        return true;
-
+    public static String multString(String text, int numTimes) {
+        String result = "";
+        for (int i = 0; i < numTimes; i++) {
+            result += text;
+        }
+        return result;
     }
 
-    public static boolean midPrimeString(String str, int start, int end) {
+    public static boolean primeString(String mainStr, String str) {
+        int multCount = 0;
 
-        if (end - start < 2)
-            return false;
+        if (str.length() % 2 == 0 && str.indexOf(str, (str.indexOf(str) + 1)) != -1) {
+            multCount = str.length() / 2;
+            if (multString(str, multCount).equals(mainStr))
+                return false;
 
-        int mid = (start + end) / 2;
-        midPrimeString(str, start, mid);
-        midPrimeString(str, mid, end);
-        return isPrimeString(str, start, mid, end);
+        }
 
+        primeString(mainStr, str.substring(0, str.length() - 1));
+
+        return true;
     }
 
     public static void main(String[] args) {
-        // System.out.println(testMethods.pythonJavaCase("hel>?!", "goodbye", "giraffe",
-        // false));
-        // System.out.println(stringNumberSum("He1l3E"));
-        // System.out.println(testMethods.fourFitInOne(1, 2, 3, 40));
-        // System.out.println(testMethods.phoneNumberFormatter("1112223333", 1));
-        // System.out.println(testMethods.okayLineUp(1.0, 20.0, 3.0));
-        // String str = "BoraBora";
-        // System.out.println(midPrimeString(str, 0, str.length()));
-        almostPrime(10, 20);
+        // System.out.println(primeString("hello", "hell"));
+        // System.out.println(primeString("BoraBora", "BoraBor"));
+        System.out.println(shouldAnswerCell(false, false, false, false));
+        System.out.println(shouldAnswerCell(false, false, true, false));
+        System.out.println(shouldAnswerCell(true, false, false, false));
+        System.out.println(shouldAnswerCell(false, false, false, true));
+
     }
 
 }

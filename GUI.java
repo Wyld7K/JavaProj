@@ -79,7 +79,8 @@ public class GUI extends JFrame implements ActionListener, FocusListener {
          * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          */
         // create tasks selector pull-down menu
-        String[] taskList = { "Select:", "pythonJavaCase", "okayLineUp", "multString", "phoneNumberFormatter" }; // Add
+        String[] taskList = { "Select:", "pythonJavaCase", "okayLineUp", "multString", "phoneNumberFormatter",
+                "(H) almostPrime", "getTicket", "stringNumberSum", "shouldAnswerCell" }; // Add
         // to
         // pulldown
         // menu
