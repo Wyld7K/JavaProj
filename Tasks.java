@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.*;
 
 public class Tasks {
@@ -350,10 +351,68 @@ public class Tasks {
         if (str.indexOf(str, str.indexOf(str) + 1) == -1) {
             return true;
         }
-        primeString(mainString, str.substring(0, str.length() + 1));
+        return primeString(mainString, str.substring(0, str.length() + 1));
 
-        return false;
+    }
 
+    public String fullURL(String websiteName) {
+        if (websiteName.contains("http://www."))
+            return websiteName;
+        if (websiteName.contains("www."))
+            return "http://" + websiteName;
+        if (!websiteName.contains("."))
+            return "Bad Address";
+        return "http://www." + websiteName;
+    }
+
+    public long sumOfPowers(int exp, int numOfTerms) {
+
+        long sumOfPowers = 0;
+        // the sum of of the consecutive powers of integers up to numberOfTerms; the
+        for (int i = 1; i < numOfTerms + 1; i++) {
+            System.out.println((long) Math.pow(i, exp));
+            sumOfPowers += (long) Math.pow(i, exp);
+        }
+        return sumOfPowers;
+    }
+
+    public double hypotenuse(int a, int b, int c) {
+
+        if (Math.pow(a, 2) >= (Math.pow(b, 2) + Math.pow(c, 2))) {
+
+            return Math.pow(a, 2);
+        } else if (Math.pow(b, 2) >= (Math.pow(a, 2) + Math.pow(c, 2))) {
+
+            return Math.pow(b, 2);
+        } else if (Math.pow(c, 2) >= (Math.pow(a, 2) + Math.pow(b, 2))) {
+
+            return Math.pow(c, 2);
+        }
+        return -1;
+    }
+
+    public BigInteger factorial(long num) {
+        // Base Case
+        if (num == 0)
+            return new BigInteger(1 + "");
+        // Big integer uses strings as parameters
+
+        BigInteger factorial = new BigInteger(((factorial(num - 1)).multiply(new BigInteger(num + ""))) + "");
+        return factorial;
+    }
+
+    public String isPlainDrome(int num) {
+        if (num / 10 == 0)
+            return "Yes Is Plaindrome";
+        // 20
+        // 22
+        // 24
+        int newNum = (10 * (num % 10)) + num / 10;
+        if (newNum == num)
+            return "Yes Is Plaindrome";
+
+        isPlainDrome(num / 10);
+        return "No is not palindrome";
     }
 
 }

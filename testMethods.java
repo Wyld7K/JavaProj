@@ -226,29 +226,108 @@ public class testMethods {
         return result;
     }
 
-    public static boolean primeString(String mainStr, String str) {
-        int multCount = 0;
+    // public static boolean primeString(String mainStr, String str) {
+    // int multCount = 0;
 
-        if (str.length() % 2 == 0 && str.indexOf(str, (str.indexOf(str) + 1)) != -1) {
-            multCount = str.length() / 2;
-            if (multString(str, multCount).equals(mainStr))
-                return false;
+    // if (str.length() % 2 == 0 && str.indexOf(str, (str.indexOf(str) + 1)) != -1)
+    // {
+    // multCount = str.length() / 2;
+    // if (multString(str, multCount).equals(mainStr))
+    // return false;
 
+    // }
+
+    // primeString(mainStr, str.substring(0, str.length() - 1));
+
+    // return true;
+    // }
+
+    public static int isFibanacci(int num) {
+        if (num == 0 || num == 1) {
+            return num;
         }
 
-        primeString(mainStr, str.substring(0, str.length() - 1));
+        return isFibanacci(num - 1) + isFibanacci(num - 2);
 
-        return true;
+    }
+
+    public static boolean primeString(String string) {
+        return calc2(string, (int) (string.length() / 2));
+    }
+
+    public static boolean calc2(String string, int len) {
+        // if composite
+        if (string.length() == 0) {
+            return false;
+        }
+
+        String sub1 = string.substring(0, len);
+        String sub2 = string.substring(len, len + len);
+
+        if (len == 1 && !sub1.equals(sub2)) {
+            return true;
+        }
+
+        if (sub1.equals(sub2)) {
+
+            // if our current substring is repeated in the next "substring" interation
+            // Case: hackhackhackhackhack --> if hack == hack, then test if the rest of the
+            // string contains "hack"
+            if (string.length() % len == 0) {
+                String remaingString = string.substring(len * 2, string.length());
+                for (int i = 0; i < (remaingString.length() / len); i++) {
+                    String sub3 = string.substring(len * (2 + i), len * (3 + i));
+                    if (!sub2.equals(sub3)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            String newSubstring = string.substring(len * 2, string.length());
+            int newLength = (int) (newSubstring.length() / 2);
+
+            // This is necessary because in the case of "hackhackhackhackhack", the first
+            // repeatable pattern is "hackhack"
+            // which isn't repeated in the whole string. This tries to see if there are any
+            // more repeatable patterns in the remaining
+            // "hack" string, but if not, continue decrementing, hoping to find a smaller
+            // pattern
+
+            // if composite
+            if (!calc2(newSubstring, newLength)) {
+                return false;
+            } else {
+                // try again through decrementing
+                return calc2(string, len - 1);
+            }
+        }
+        return calc2(string, len - 1);
     }
 
     public static void main(String[] args) {
-        // System.out.println(primeString("hello", "hell"));
-        // System.out.println(primeString("BoraBora", "BoraBor"));
-        System.out.println(shouldAnswerCell(false, false, false, false));
-        System.out.println(shouldAnswerCell(false, false, true, false));
-        System.out.println(shouldAnswerCell(true, false, false, false));
-        System.out.println(shouldAnswerCell(false, false, false, true));
+        System.out.println(primeString("hackinghackinghackhack"));
+        // System.out.println(primeString("hackhackcodecode"));
+
+        /*
+         * primeString("hello") returns true
+         * prime, since the "l" repeats, but "hello" is not only made of repeats
+         * 
+         * primeString("mississippi") returns true
+         * prime, since there are some repeats,but it's not only made of repeats
+         * 
+         * primeString("BoraBora") returns false
+         * composite, since it’s just "Bora" + "Bora"
+         * 
+         * primeString("HackHackcodecode") returns false
+         * composite, since it's just "Hack" + "Hack" and "code" + "code"
+         * 
+         * primeString("HackcodeHackcode") returns false
+         * composite, since it's just "Hackcode" + "Hackcode"
+         * 
+         * primeString("HackHackcode") returns true
+         * prime since "code" only appears once, there is no way to write it as repeats
+         * only
+         */
 
     }
-
 }

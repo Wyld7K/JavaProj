@@ -125,6 +125,42 @@ public class GUIinteractions {
                 entry[3].setText("isGrumpy?");
                 break;
             }
+            case 9: {
+                report.setText("Please enter a URL in the first box");
+                entry[0].setText("URL");
+                entry[1].setText("");
+                entry[2].setText("");
+                entry[3].setText("");
+                break;
+
+            }
+            case 10: {
+                report.setText(
+                        "Please enter in box 1 an exponent. Please enter in box 2, the max number that the exponent will be raised to");
+                entry[0].setText("Exponent");
+                entry[1].setText("Max-Number");
+                entry[2].setText("");
+                entry[3].setText("");
+                break;
+            }
+            case 11: {
+                report.setText(
+                        "Please enter three numbers, one for each box and I will determine if those length values could make a right triangle");
+                entry[0].setText("First-Side-Length");
+                entry[1].setText("Second-Side-Length");
+                entry[2].setText("Third-Side-Length");
+                entry[3].setText("");
+                break;
+            }
+            case 12: {
+                report.setText(
+                        "Please enter in box 1 a number and I will calcualte the factorial \n" +
+                                "(I calculated this using recursion because some of the (H) problems involve recursion and I needed a simple example to practice on");
+                entry[0].setText("Number");
+                entry[1].setText("");
+                entry[2].setText("");
+                entry[3].setText("");
+            }
 
             // must leave this in:
             default:
@@ -237,6 +273,26 @@ public class GUIinteractions {
 
                 break;
                 // report.setText)
+            }
+            case 9: {
+                report.setText(tasks.fullURL(arg1));
+                break;
+            }
+            case 10: {
+                report.setText("" + tasks.sumOfPowers(Integer.parseInt(arg1), Integer.parseInt(arg2)));
+                break;
+            }
+            case 11: {
+                report.setText(
+                        "Hypotenuse is: " + tasks.hypotenuse(Integer.parseInt(arg1), Integer.parseInt(arg2),
+                                Integer.parseInt(arg3)));
+                break;
+
+            }
+
+            case 12: {
+                report.setText("Your Number's Factorial Is: " + tasks.factorial(Integer.parseInt(arg1)));
+                break;
             }
 
             // must leave this in:
